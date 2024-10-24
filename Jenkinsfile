@@ -9,7 +9,7 @@ pipeline {
                 script {
                     // Checkout the specified branch
                     def branchName = params.BRANCH_NAME
-                    checkout([$class: 'GitSCM', branches: [[name: branchName]], userRemoteConfigs: [[url: 'https://github.com/RAJANI9/boxfuse-sample-java-war-hello.git']]])
+                    checkout([$class: 'GitSCM', branches: [[name: branchName]], userRemoteConfigs: [[url: 'https://github.com/Sharanya2821/sample-java-war-hello.git']]])
                 }
             }
          }
@@ -22,7 +22,7 @@ pipeline {
         stage("Build") {
             steps {
                 sh "mvn clean package"
-                sh "mv target/hello-1.0.war target/boxfuse-sample-java-war-hello.war"
+                sh "mv target/hello-1.0.war target/sample-java-war-hello.war"
             }
         }
         stage("Deploy to Dev") {
@@ -30,7 +30,7 @@ pipeline {
                 expression { params.BRANCH_NAME == 'fe/dev' }
             }
             steps {
-                deployToTomcat('13.233.140.75', 'tomcat', 'tomcat', 'http://13.233.140.75:8080/manager/text', '/boxfuse-sample-java-war-hello', 'Dev')
+                deployToTomcat('13.49.78.43', 'tomcat', 'tomcat', 'http://13.49.78.43:8080/manager/text', '/sample-java-war-hello', 'Dev')
             }
         }
         stage("Deploy to QA") {
@@ -38,7 +38,7 @@ pipeline {
                 expression { params.BRANCH_NAME == 'fe/qa' }
             }
             steps {
-                deployToTomcat('35.154.248.74', 'tomcat', 'tomcat', 'http://35.154.248.74:8080/manager/text', '/boxfuse-sample-java-war-hello', 'QA')
+                deployToTomcat('13.61.14.58', 'tomcat', 'tomcat', 'http://13.61.14.58:8080/manager/text', '/sample-java-war-hello', 'QA')
             }
         }
         stage("Deploy to Prod") {
@@ -49,17 +49,16 @@ pipeline {
                 input(message: "Do you want to proceed to PROD?", ok: "Proceed") // Approval step
 
                 // Deploy to PROD server after approval
-                deployToTomcat('43.205.203.47', 'tomcat', 'tomcat', 'http://43.205.203.47:8080/manager/text', '/boxfuse-sample-java-war-hello', 'Prod')
+                deployToTomcat('13.60.89.219', 'tomcat', 'tomcat', 'http://13.60.89.219:8080/manager/text', '/sample-java-war-hello', 'Prod')
                 
-                // Send Slack notification
-                slackSend(channel: 'devopsrocks9am', message: "Deployment to PROD has been approved by manager.")
+                
             }
         }
     }
 }
 
 def deployToTomcat(tomcatIP, username, password, tomcatURL, contextPath, environment) {
-    def warFileName = 'target/boxfuse-sample-java-war-hello.war'
+    def warFileName = 'target/sample-java-war-hello.war'
 
     // Deploy the WAR file using curl
     sh """
