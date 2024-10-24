@@ -1,8 +1,7 @@
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Rajinikanth Cloud DevOps Kitchen+1</title>
+    <title>Archie Cloud DevOps Kitchen+1</title>
     <style>
         body {
             text-align: center;
@@ -56,7 +55,7 @@
     </style>
 </head>
 <body>
-    <h1>Welcome to Archies Jenkins Master Branch </h1>
+    <h1>Welcome to Archies Jenkins Final changes Master Branch </h1>
     <h2>Menu</h2>
 
     <div id="menu">
