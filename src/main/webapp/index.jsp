@@ -55,7 +55,7 @@
     </style>
 </head>
 <body>
-    <h1>Welcome to Archies Jenkins Final changes Master Branch </h1>
+    <h1>Welcome to Archies Kitchen Dev Branch </h1>
     <h2>Menu</h2>
 
     <div id="menu">
